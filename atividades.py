@@ -130,6 +130,7 @@ print(f'O salário líquido é R$ {salario_liq:.3f}')
 print("*"*35)
 
 
+
 #16 Faça um programa para uma loja de tintas. O programa deverá pedir o tamanho em metros quadrados da área a ser pintada.
 # Considere que a cobertura da tinta é de 1 litro para cada 3 metros quadrados e que a tinta é vendida em latas de 18 litros, que custam R$ 80,00.
 # Informe ao usuário a quantidades de latas de tinta a serem compradas e o preço total.
@@ -148,42 +149,50 @@ if litros % capacidade_lata != 0:
 
 valor_total = latas_inteiras * preco_lata
 print(f'QTD litros necessários: {litros:.2f} l\n'
-      f'Latas de tinta necessárias: {latas_inteiras} lt\n'
       f'Total da compra R$ {valor_total}')
 
 
-# #17 Faça um Programa para uma loja de tintas. O programa deverá pedir o tamanho em metros quadrados da área a ser pintada. Considere que a cobertura da tinta é de 1 litro para cada 6 metros quadrados e que a tinta é vendida em latas de 18 litros, que custam R$ 80,00 ou em galões de 3,6 litros, que custam R$ 25,00.
+#17 Faça um Programa para uma loja de tintas. O programa deverá pedir o tamanho em metros quadrados da área a ser pintada. Considere que a cobertura da tinta é de 1 litro para cada 6 metros quadrados e que a tinta é vendida em latas de 18 litros, que custam R$ 80,00 ou em galões de 3,6 litros, que custam R$ 25,00.
 # Informe ao usuário as quantidades de tinta a serem compradas e os respectivos preços em 3 situações:
 # comprar apenas latas de 18 litros;
 # comprar apenas galões de 3,6 litros;
 # misturar latas e galões, de forma que o desperdício de tinta seja menor. Acrescente 10% de folga e sempre arredonde os valores para cima, isto é, considere latas cheias.
 
+def calculo_loja_tintas(litro):
+    # LATAS
+    latas = litro / 18
+    if latas % 18 != 0:
+        latas += 1
+    preco_das_latas= latas * 80
 
-cobertura_tinta = 6
-capacidade_lata = 18
-preco_lata = 80.0
+    # GALOES
+    galoes = litro / 3.6
+    if galoes % 3.6 != 0:
+        galoes += 1
+    preco_dos_galoes = galoes * 25
 
-capacidade_galao = 3.6
-preco_galao = 25.0
-
-tamanho_area = int(input("Digite o tamanho da área a ser pintada em m²: "))
-
-litros = tamanho_area / cobertura_tinta * 1.1
-latas_inteiras = int(litros/capacidade_lata)
-galao = int(litros/capacidade_galao)
-
+    mistura_lata = int(litro / 18.0)
+    mistura_galao = int((litro - (mistura_lata * 18)) / 3.6)
+    if litro - (mistura_lata * 18) % 3.6 != 0:
+        mistura_galao += 1
+    galoes_total = (mistura_lata * 80) + (mistura_galao * 25)
 
 
-valor_total_latas = latas_inteiras * preco_lata
-valor_total_galao = galao * preco_galao
+    print(f'''
+        Total de Litros necessário para pintar: {litro:.0f}L
+        Apenas latas de 18 litros: {latas:.0f} Und. - Preço: R$ {preco_das_latas:.2f}
+        Apenas galões de 3.6 litros: {galoes:.0f} Und. - Preço: R$ {preco_dos_galoes:.2f}
+        Mistura: {mistura_lata:.0f} Latas e {mistura_galao:.0f} Galões = R$ {galoes_total:.2f}''')
 
-mixlatas = (litros / capacidade_lata)
-mixgalao = (litros - mixlatas * capacidade_lata) / 3.6
+area_pintura = float(input('Tamanho em metros quadrados da área a ser pintada: '))
+litros = area_pintura / 6  * 1.1
+calculo_loja_tintas(litros)
 
-if litros % capacidade_lata != 0:
-    latas_inteiras += 1
 
-print(f'QTD litros necessários: {litros:.2f} l\n'
-      f'Latas de tinta necessárias: {latas_inteiras} lt\n'
-      f'Total da compra R$ {valor_total}')
+#18 Faça um programa que peça o tamanho de um arquivo para download (em MB) e a velocidade de um link de Internet (em Mbps),
+# calcule e informe o tempo aproximado de download do arquivo usando este link (em minutos).
 
+arquivo = float(input("Informe do tamanho do arquivo em MegaByte: "))
+link = float(input("Informe a velocidade do link em Mbps: "))
+tempo = ((arquivo * 8) / link) / 60
+print ("O tempo aproximado de download é de %.2f minutos" %tempo)
