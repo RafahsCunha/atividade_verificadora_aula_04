@@ -5,7 +5,7 @@ print("Olá Mundo")
 numero = input("digite um numero: ")
 print("O número informado foi", numero)
 
-# #3. Faça um Programa que peça dois números e imprima a soma.
+#3. Faça um Programa que peça dois números e imprima a soma.
 numero1 = int(input("Digite o primeiro numero: "))
 numero2 = int(input("Digite o segundo numero: "))
 print("A soma dos numeros é: ", numero1 + numero2)
